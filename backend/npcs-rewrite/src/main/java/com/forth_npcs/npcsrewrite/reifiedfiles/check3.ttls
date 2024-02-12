@@ -1,0 +1,8 @@
+<http://db.uwaterloo.ca/~galuc/wsdbm/City205>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country110> {| <http://example.org/occurrenceOf> <http://example.org/statement/21> |}.
+<http://db.uwaterloo.ca/~galuc/wsdbm/City206>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country110> {| <http://example.org/occurrenceOf> <http://example.org/statement/22> |}.
+<http://db.uwaterloo.ca/~galuc/wsdbm/City207>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country123> {| <http://example.org/occurrenceOf> <http://example.org/statement/23> |}.
+<http://db.uwaterloo.ca/~galuc/wsdbm/City208>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country11> {| <http://example.org/occurrenceOf> <http://example.org/statement/24> |}.
+<http://db.uwaterloo.ca/~galuc/wsdbm/City209>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country112> {| <http://example.org/occurrenceOf> <http://example.org/statement/25> |}.
+<http://db.uwaterloo.ca/~galuc/wsdbm/City20>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country15> {| <http://example.org/occurrenceOf> <http://example.org/statement/26> |}.
+<http://db.uwaterloo.ca/~galuc/wsdbm/City210>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country11> {| <http://example.org/occurrenceOf> <http://example.org/statement/27> |}.
+<http://db.uwaterloo.ca/~galuc/wsdbm/City211>	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/Country1110> {| <http://example.org/occurrenceOf> <http://example.org/statement/28> |}.
