@@ -23,7 +23,12 @@ reification schemes. The supported reification schemes are:
 6. =SPARQL=for non reification
 
 You can rewrite a query using the RDF-star reification scheme:
-
+Parameters are 
+#+BEGIN_SRC
+1st:reification scheme 
+2nd: path OR query (if you are sending query then write query if you are sending path then write path)
+3rd: path OR query (send query or path)
+#+END_SRC
 #+BEGIN_SRC
 docker run --name npcs_container npcs:v1 "SPARQL_Star" "path" queries\watdivqueries\Basic\C1\00.sparql
 #+END_SRC
