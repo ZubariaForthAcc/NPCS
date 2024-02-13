@@ -1,0 +1,61 @@
+
+* NPCS Webservices
+
+** Building the docker image
+
+First, build the docker image
+
+#+BEGIN_SRC
+docker build -t npcs_web:v1 .
+#+END_SRC
+
+** Running docker image
+
+#+BEGIN_SRC
+docker run -d -p 8080:8080 -t npcs_web:v1
+#+END_SRC
+
+The parameters =rdfstar= and =wikidata= are the identifiers for the
+reification schemes. The supported reification schemes are:
+
+1. =SPARQL_Star= RDF-star reification.
+2. =Wikidatareal= Wikidata refication (to be used to query the official Wikidata).
+3. =Wikidata= a variant for the Wikidata reification scheme.
+4. =Namedgraph= for using named graphs (not working yet)
+5. =Standard= for using standard reification
+6. =SPARQL=for non reification
+
+You can rewrite a query using the RDF-star reification scheme:
+Parameters are 
+#+BEGIN_SRC
+1st:reification scheme 
+2nd: path OR query (if you are sending query then write query if you are sending path then write path)
+3rd: path OR query (send query or path)
+#+END_SRC
+
+** Call the rewriting service at : http://localhost:8080/api/content/rewrite
+By passing the following JSON.It will return the rewritten query
+#+BEGIN_SRC
+{
+"input1": "Wikidatareal",
+"input2": "path",
+"input3": "src/main/resources/queries/watdivqueries/Basic/C1/00.sparql"
+}
+#+END_SRC
+
+** Call the executing service at : http://localhost:8080/api/content/executeQuery
+By passing the following JSON.It will return the rewritten query
+#+BEGIN_SRC
+{
+"repositoryUrl": "http://localhost:7200/repositories/watdivstandardgraphdb",
+"query":rewritten_query 
+}
+#+END_SRC
+
+** Call the uploading service at : http://localhost:8080/api/content/uploadDataGDB
+By passing the following File and repositoryUrl.
+
+
+
+
+
