@@ -33,7 +33,7 @@ Parameters are
 3rd: path OR query (send query or path)
 #+END_SRC
 
-**Call the rewriting service at : http://localhost:8080/api/content/rewrite
+** Call the rewriting service at : http://localhost:8080/api/content/rewrite
 By passing the following JSON.It will return the rewritten query
 #+BEGIN_SRC
 {
@@ -43,7 +43,7 @@ By passing the following JSON.It will return the rewritten query
 }
 #+END_SRC
 
-**Call the executing service at : http://localhost:8080/api/content/executeQuery
+** Call the executing service at : http://localhost:8080/api/content/executeQuery
 By passing the following JSON.It will return the rewritten query
 #+BEGIN_SRC
 {
@@ -52,7 +52,7 @@ By passing the following JSON.It will return the rewritten query
 }
 #+END_SRC
 
-**Call the uploading service at : http://localhost:8080/api/content/uploadDataGDB
+** Call the uploading service at : http://localhost:8080/api/content/uploadDataGDB
 By passing the following File and repositoryUrl.
 
 
