@@ -25,31 +25,31 @@ reification schemes. The supported reification schemes are:
 You can rewrite a query using the RDF-star reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 SPARQL_Star queries\watdivqueries\Basic\C1\00.sparql
+docker run --name npcs_container npcs:v1 "SPARQL_Star" "path" queries\watdivqueries\Basic\C1\00.sparql
 #+END_SRC
 
 You can rewrite a query using the wikidata reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Wikidata queries\watdivqueries\Basic\C1\00.sparql
+docker run --name npcs_container npcs:v1 "Wikidata" "path" queries\watdivqueries\Basic\C1\00.sparql
 #+END_SRC
 
 You can rewrite a query using the namedgraph reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Namedgraph queries\watdivqueries\Basic\C1\00.sparql
+docker run --name npcs_container npcs:v1 "Namedgraph" "path" queries\watdivqueries\Basic\C1\00.sparql
 #+END_SRC
 
 You can rewrite a query using the Standard reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Standard queries\watdivqueries\Basic\C1\00.sparql
+docker run --name npcs_container npcs:v1 "Standard" "path" queries\watdivqueries\Basic\C1\00.sparql
 #+END_SRC
 
 You can rewrite a query using the Wikidata real reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Wikidatareal queries\wikidataqueries\Basic\multiple\01.sparql
+docker run --name npcs_container npcs:v1 "Wikidatareal" "path" queries\wikidataqueries\Basic\multiple\01.sparql
 #+END_SRC
 
 
@@ -57,7 +57,7 @@ docker run --name npcs_container npcs:v1 Wikidatareal queries\wikidataqueries\Ba
 You can execute the rewritten query on Wikidata:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Wikidatareal queries\wikidataqueries\Basic\multiple\01.sparql https://query.wikidata.org/sparql 1
+docker run --name npcs_container npcs:v1 "Wikidatareal" "path" queries\wikidataqueries\Basic\multiple\01.sparql https://query.wikidata.org/sparql 1
 #+END_SRC
 
 You can execute the other rewritten queries by loading the Watdiv data in GraphDB or Stardog
@@ -65,25 +65,25 @@ You can execute the other rewritten queries by loading the Watdiv data in GraphD
 You can rewrite a query using the RDF-star reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 SPARQL_Star queries\watdivqueries\Basic\C1\00.sparql http://localhost:7200/repositories/watdivrdfstargraphdb 1
+docker run --name npcs_container npcs:v1 "SPARQL_Star" "path" queries\watdivqueries\Basic\C1\00.sparql http://localhost:7200/repositories/watdivrdfstargraphdb
 #+END_SRC
 
 You can rewrite a query using the wikidata reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Wikidata queries\watdivqueries\Basic\C1\00.sparql http://localhost:5820/watdivwikidatagraphdb/query 1
+docker run --name npcs_container npcs:v1 "Wikidata" "path" queries\watdivqueries\Basic\C1\00.sparql http://localhost:5820/watdivwikidatagraphdb/query
 #+END_SRC
 
 You can rewrite a query using the namedgraph reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Namedgraph queries\watdivqueries\Basic\C1\00.sparql http://localhost:7200/repositories/watdivnamedgraphgraphdb 1
+docker run --name npcs_container npcs:v1 "Namedgraph" "path" queries\watdivqueries\Basic\C1\00.sparql http://localhost:7200/repositories/watdivnamedgraphgraphdb
 #+END_SRC
 
 You can rewrite a query using the Standard reification scheme:
 
 #+BEGIN_SRC
-docker run --name npcs_container npcs:v1 Standard queries\watdivqueries\Basic\C1\00.sparql  http://localhost:7200/repositories/watdivstandardgraphdb 1
+docker run --name npcs_container npcs:v1 "Standard" "path" queries\watdivqueries\Basic\C1\00.sparql  http://localhost:7200/repositories/watdivstandardgraphdb
 #+END_SRC
 
 
