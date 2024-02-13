@@ -53,7 +53,7 @@ By passing the following JSON.It will return the rewritten query
 #+END_SRC
 
 ** Call the uploading service at : http://localhost:8080/api/content/uploadDataGDB
-By passing the following File and repositoryUrl.
+By passing the File and repositoryUrl.
 
 
 
