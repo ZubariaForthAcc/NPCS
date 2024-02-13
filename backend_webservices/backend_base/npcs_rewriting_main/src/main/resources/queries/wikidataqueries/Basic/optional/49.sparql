@@ -1,0 +1,4 @@
+SELECT ?var2
+WHERE {
+?var1 <http://www.wikidata.org/prop/direct/P31> <http://www.wikidata.org/entity/Q13442814> . OPTIONAL { ?var1 <http://www.wikidata.org/prop/direct/P1476> ?var2 . }
+}

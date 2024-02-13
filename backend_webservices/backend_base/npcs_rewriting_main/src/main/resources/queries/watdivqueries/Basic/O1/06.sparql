@@ -1,0 +1,7 @@
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+SELECT ?v0 ?v2 ?v3 WHERE {
+  ?v0 wsdbm:subscribes wsdbm:Website4637 .
+  ?v0 wsdbm:likes ?v2 .
+  OPTIONAL { ?v2 sorg:caption ?v3 . }
+}

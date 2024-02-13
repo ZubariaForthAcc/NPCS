@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>npcs_rewriting_main</groupId>
+  <artifactId>npcs_rewriting_main</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  		<dependencies>
+  	<dependency>
+			<groupId>org.eclipse.rdf4j</groupId>
+			<artifactId>rdf4j-storage</artifactId>
+			<type>pom</type>
+			<version>4.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.10</version>
+			<scope>runtime</scope>
+		</dependency>
+			</dependencies>
+			<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version> <!-- Update to the latest version -->
+            <configuration>
+                <source>11</source> <!-- Update to your desired Java version -->
+                <target>11</target> <!-- Update to your desired Java version -->
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+</project>

@@ -1,0 +1,7 @@
+PREFIX og: <http://ogp.me/ns#>
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+SELECT ?v0 ?v2 WHERE {
+  ?v0 og:tag wsdbm:Topic145 .
+  OPTIONAL { ?v0 sorg:caption ?v2 . }
+}
