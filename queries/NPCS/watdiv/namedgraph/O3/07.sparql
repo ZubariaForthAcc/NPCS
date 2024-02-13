@@ -1,0 +1,30 @@
+PREFIX og: <http://ogp.me/ns#>
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT  ?v0 ?v2  (concat("(⊕",group_concat(?funion1),")" )AS ?f)
+WHERE {
+{SELECT ?v0 ?v2  (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin1) WHERE {
+           GRAPH ?fprov0 { ?v0 og:tag wsdbm:Topic119  . } 
+           GRAPH ?fprov1 { ?v0 sorg:caption ?v2  . }
+            BIND(concat(" (⊗",COALESCE(STR(?fprov0),""),COALESCE(STR(?fprov1),""),")")AS ?fprov)           
+          }group by ?v0 ?v2}
+UNION
+{SELECT ?v0 ?v2   (concat("(⊖",?fjoin2,group_concat(?fjoin3),")")AS ?fopt1) WHERE {
+    {
+SELECT ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?fjoin2) WHERE {
+                    GRAPH ?fprov0 { ?v0 og:tag wsdbm:Topic119 . }
+  
+                    BIND(concat(" (⊗",COALESCE(STR(?fprov0),""), ")")AS ?fprov)
+     }group by ?v0 
+    }
+        OPTIONAL{
+                                        
+                            { Select ?v0 ?v2  (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin3)
+                          where{	 GRAPH ?fprov1 { ?v0 sorg:caption ?v2  . } 
+                        BIND(concat(" (⊗",COALESCE(STR(?fprov1),""), ")")AS ?fprov)
+                          }group by ?v0 ?v2}.
+    }
+}group by ?v0 ?v2  ?fjoin2}  
+    BIND(concat(" (⊕",COALESCE(STR(?fjoin1),""),COALESCE(STR(?fopt1),""), ")")AS ?funion1)
+}group by ?v0 ?v2 

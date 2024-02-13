@@ -1,0 +1,13 @@
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX sorg: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ex: <http://example.org/>
+SELECT ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+                                 ?fprov0 rdf:subject ?v0 ; rdf:predicate dc:Location ; rdf:object ?v1 .
+                                    ?fprov1 rdf:subject ?v0 ; rdf:predicate sorg:nationality ; rdf:object wsdbm:Country18 .
+                                  ?fprov2 rdf:subject ?v0 ; rdf:predicate wsdbm:gender ; rdf:object ?v3 .
+                     ?fprov3 rdf:subject ?v0 ; rdf:predicate rdf:type ; rdf:object wsdbm:Role2 . 
+                  			
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3), ")")AS ?fprov)
+     }group by ?v0  

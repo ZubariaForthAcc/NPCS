@@ -1,0 +1,30 @@
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT  ?v0 ?v1 (concat("(⊕",group_concat(?funion1),")" )AS ?f)
+WHERE {
+{SELECT ?v0 ?v1  (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin1) WHERE {
+            ?v0 wsdbmp:subscribes ?fprov0 . ?fprov0 wsdbmps:subscribes wsdbm:Website13903 .
+            ?v0 wsdbmp:likes ?fprov1 . ?fprov1 wsdbmps:likes ?v1 .
+            BIND(concat(" (⊗",COALESCE(STR(?fprov0),""),COALESCE(STR(?fprov1),""),")")AS ?fprov)           
+          }group by ?v0 ?v1 }
+UNION
+{SELECT ?v0 ?v1  (concat("(⊖",?fjoin2,group_concat(?fjoin3),")")AS ?fopt1) WHERE {
+    {
+SELECT ?v0   (concat("(⊕",group_concat(?fprov),")")AS ?fjoin2) WHERE {
+                   ?v0 wsdbmp:subscribes ?fprov0 . ?fprov0 wsdbmps:subscribes wsdbm:Website13903 .
+  
+                    BIND(concat(" (⊗",COALESCE(STR(?fprov0),""), ")")AS ?fprov)
+     }group by ?v0 
+    }
+        OPTIONAL{
+                                        
+                            { Select ?v0 ?v1 (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin3)
+                          where{     ?v0 wsdbmp:likes ?fprov1 . ?fprov1 wsdbmps:likes ?v1 . 
+                        BIND(concat(" (⊗",COALESCE(STR(?fprov1),""), ")")AS ?fprov)
+                          }group by ?v0 ?v1}.
+    }
+}group by ?v0 ?v1 ?fjoin2}  
+    BIND(concat(" (⊕",COALESCE(STR(?fjoin1),""),COALESCE(STR(?fopt1),""), ")")AS ?funion1)
+}group by ?v0 ?v1

@@ -1,0 +1,9 @@
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+ ?fprov0 rdf:subject ?v0 ; rdf:predicate wsdbm:subscribes ; rdf:object wsdbm:Website13077 . 
+?fprov1 rdf:subject ?v2 ; rdf:predicate sorg:caption ; rdf:object ?v3 .
+?fprov2 rdf:subject ?v0 ; rdf:predicate wsdbm:likes ; rdf:object ?v2 . 
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2), ")")AS ?fprov)
+     }group by ?v0

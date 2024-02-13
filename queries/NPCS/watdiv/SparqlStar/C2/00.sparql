@@ -1,0 +1,20 @@
+prefix sorg: <http://schema.org/>
+prefix rev: <http://purl.org/stuff/rev#>
+PREFIX gr: <http://purl.org/goodrelations/>
+prefix foaf: <http://xmlns.com/foaf/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+select ?v0 ?v3 ?v4 ?v8 (concat("(⊕",group_concat(?fprov),")")AS ?f) where { 
+  << ?v0	sorg:legalName	?v1 >> ex:occurrenceOf ?fprov0. 
+  <<?v0	gr:offers	?v2 >> ex:occurrenceOf ?fprov1. 
+   <<?v2	sorg:eligibleRegion	?a >> ex:occurrenceOf ?fprov2. 
+  << ?v2	gr:includes	?v3 >> ex:occurrenceOf ?fprov3. 
+ <<?v4	sorg:jobTitle	?v5 >> ex:occurrenceOf ?fprov4. 
+  <<?v4	foaf:homepage	?v6 >> ex:occurrenceOf ?fprov5. 
+  <<?v4	wsdbm:makesPurchase	?v7 >> ex:occurrenceOf ?fprov6. 
+  << ?v7	wsdbm:purchaseFor	?v3 >> ex:occurrenceOf ?fprov7. 
+   <<?v3	rev:hasReview	?v8 >> ex:occurrenceOf ?fprov8. 
+   <<?v8	rev:totalVotes	?v9 >> ex:occurrenceOf ?fprov9. 
+  BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),STR(?fprov8),STR(?fprov9),")")AS ?fprov)
+	
+}group by ?v0 ?v3 ?v4 ?v8

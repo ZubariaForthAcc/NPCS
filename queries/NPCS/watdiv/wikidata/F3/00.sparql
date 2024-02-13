@@ -1,0 +1,18 @@
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+
+SELECT ?v0 ?v1 ?v2 ?v4 ?v5 ?v6 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+?v0 sorgp:contentRating ?fprov0 . ?fprov0 sorgps:contentRating ?v1 .
+?v0 sorgp:contentSize ?fprov1 . ?fprov1 sorgps:contentSize ?v2 .
+?v0 wsdbmp:hasGenre ?fprov2 . ?fprov2 wsdbmps:hasGenre ?v3 .
+?v4 wsdbmp:makesPurchase ?fprov3 . ?fprov3 wsdbmps:makesPurchase ?v5 .
+?v5 wsdbmp:purchaseDate ?fprov4 . ?fprov4 wsdbmps:purchaseDate ?v6 .
+?v5 wsdbmp:purchaseFor ?fprov5 . ?fprov5 wsdbmps:purchaseFor ?v0 .
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5), ")")AS ?fprov)
+	
+}group by ?v0 ?v1 ?v2 ?v3 ?v4 ?v5 ?v6 
+

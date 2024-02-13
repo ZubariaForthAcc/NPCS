@@ -1,0 +1,16 @@
+PREFIX ogp: <http://example.org/p/ogp.me/ns#>
+PREFIX ogps: <http://example.org/ps/ogp.me/ns#>
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+
+SELECT ?v0 ?v2  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+                
+      ?v0 ogp:tag ?fprov0 . ?fprov0 ogps:tag wsdbm:Topic156 .
+?v0 sorgp:caption ?fprov1 . ?fprov1 sorgps:caption ?v2 .      
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1), ")")AS ?fprov)
+     }group by ?v0 ?v2 
+

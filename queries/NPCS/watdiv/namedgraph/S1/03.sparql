@@ -1,0 +1,19 @@
+PREFIX gr: <http://purl.org/goodrelations/>
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+     GRAPH ?fprov0 {?v0 gr:includes ?v1 . } 
+     GRAPH ?fprov1 {wsdbm:Retailer1998 gr:offers ?v0  . } 
+      GRAPH ?fprov2 {?v0 gr:price ?v3 . } 
+       GRAPH ?fprov3 {  ?v0 gr:serialNumber ?v4 . } 
+       GRAPH ?fprov4 {?v0 gr:validFrom ?v5 . } 
+        GRAPH ?fprov5 { ?v0 gr:validThrough ?v6  . } 
+      GRAPH ?fprov6 {   ?v0 sorg:eligibleQuantity ?v7   . } 
+        GRAPH ?fprov7 { ?v0 sorg:eligibleRegion ?v8 . } 
+       GRAPH ?fprov8 { ?v0 sorg:priceValidUntil ?v9  . } 
+    
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),STR(?fprov8), ")")AS ?fprov)
+	
+}group by ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9
+

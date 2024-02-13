@@ -1,0 +1,22 @@
+prefix sorg: <http://schema.org/>
+prefix rev: <http://purl.org/stuff/rev#>
+PREFIX gr: <http://purl.org/goodrelations/>
+prefix foaf: <http://xmlns.com/foaf/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?v0 ?v4 ?v6 ?v7 (concat("(⊕",group_concat(?fprov),")")AS ?f) where { 
+   
+  ?fprov0 rdf:subject ?v0 ; rdf:predicate sorg:caption ; rdf:object ?v1 .
+  ?fprov1 rdf:subject ?v0 ; rdf:predicate sorg:text ; rdf:object ?v2 .
+  ?fprov2 rdf:subject ?v0 ; rdf:predicate sorg:contentRating ; rdf:object ?v3 .
+  ?fprov3 rdf:subject ?v0 ; rdf:predicate rev:hasReview ; rdf:object ?v4 .
+  ?fprov4 rdf:subject ?v4 ; rdf:predicate rev:title ; rdf:object ?v5 .
+  ?fprov5 rdf:subject ?v4 ; rdf:predicate rev:reviewer ; rdf:object ?v6 .
+  ?fprov6 rdf:subject ?v7 ; rdf:predicate sorg:actor ; rdf:object ?v6 .
+  ?fprov7 rdf:subject ?v7 ; rdf:predicate sorg:language ; rdf:object ?v8 .
+   
+    
+  BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),")")AS ?fprov)
+	
+}group by ?v0 ?v4 ?v6 ?v7

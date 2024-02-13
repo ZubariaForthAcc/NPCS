@@ -1,0 +1,17 @@
+PREFIX ex: <http://example.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) where { 
+   
+<< ?v0  rdf:type wsdbm:Role0 >> ex:occurrenceOf ?fprov0. 
+<<?v0  wsdbm:likes  ?v1 >> ex:occurrenceOf ?fprov1. 
+<<  ?v0  wsdbm:friendOf  ?v2 >> ex:occurrenceOf ?fprov2. 
+<< ?v0  dc:Location  ?v3 >> ex:occurrenceOf ?fprov3. 
+<<?v0  foaf:age  ?v4 >> ex:occurrenceOf ?fprov4. 
+ << ?v0  wsdbm:gender  ?v5 >> ex:occurrenceOf ?fprov5. 
+ <<?v0  foaf:givenName  ?v6 >> ex:occurrenceOf ?fprov6. 
+  BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),")")AS ?fprov)
+	
+}group by ?v0 

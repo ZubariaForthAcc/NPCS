@@ -1,0 +1,12 @@
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+
+SELECT ?v1 ?v2  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+     ?fprov0 rdf:subject wsdbm:City237 ; rdf:predicate gn:parentCountry ; rdf:object ?v1 . 
+          ?fprov1 rdf:subject ?v2 ; rdf:predicate wsdbm:likes ; rdf:object wsdbm:Product0 . 
+    ?fprov2 rdf:subject ?v2 ; rdf:predicate sorg:nationality ; rdf:object ?v1 .  
+    
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2), ")")AS ?fprov)
+     }group by ?v1 ?v2 

@@ -1,0 +1,12 @@
+PREFIX ex: <http://example.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+select ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) where {                          
+                      
+                    
+           ?v0 wsdbmp:likes ?fprov0 . ?fprov0 wsdbmps:likes ?v1 .
+?v0 wsdbmp:subscribes ?fprov1 . ?fprov1 wsdbmps:subscribes wsdbm:Website3378 .                 
+                      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),")")AS ?fprov)
+                              
+    }group by ?v0 

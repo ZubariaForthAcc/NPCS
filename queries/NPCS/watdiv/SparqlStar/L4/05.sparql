@@ -1,0 +1,13 @@
+PREFIX og: <http://ogp.me/ns#>
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+
+SELECT ?v0 ?v2  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+                      <<?v0 og:tag wsdbm:Topic88 >> ex:occurrenceOf ?fprov0. 
+                     <<  ?v0 sorg:caption ?v2>> ex:occurrenceOf ?fprov1. 
+                              
+    
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1), ")")AS ?fprov)
+     }group by ?v0 ?v2 
+

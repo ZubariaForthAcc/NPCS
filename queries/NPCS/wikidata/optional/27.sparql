@@ -1,0 +1,41 @@
+SELECT ?var1 (CONCAT("⊕(",GROUP_CONCAT(?funion0) ,")")  AS ?finalprovennacevariable) 
+WHERE { 
+{
+{ SELECT ?var1 ?var2 (CONCAT("⊕(",GROUP_CONCAT(?fjoin0) ,")")  AS ?rightunion0) 
+WHERE { 
+	?var1 <http://www.wikidata.org/prop/P21> ?fprov0 . 
+	?fprov0 <http://www.wikidata.org/prop/statement/P21> <http://www.wikidata.org/entity/Q6581097> . 
+	?var1 <http://www.wikidata.org/prop/P31> ?fprov1 . 
+	?fprov1 <http://www.wikidata.org/prop/statement/P31> <http://www.wikidata.org/entity/Q5> . 
+	?var1 <http://www.wikidata.org/prop/P106> ?fprov3 . 
+	?fprov3 <http://www.wikidata.org/prop/statement/P106> ?var2 . 
+	BIND (CONCAT("(⊗",STR(?fprov0) ,",",STR(?fprov1) ,",",STR(?fprov3) ,",",")")  AS ?fjoin0) . 
+ }
+ GROUP BY ?var1 ?var2 
+ } }
+ UNION
+{
+{ SELECT ?var1 ?var2 (CONCAT("(⊖",?rightunion1,",",GROUP_CONCAT(?rightunion2) ,",",")")  AS ?rightoptional1) 
+WHERE { 
+{ SELECT ?var1 (CONCAT("⊕(",GROUP_CONCAT(?fjoin1) ,")")  AS ?rightunion1) 
+WHERE { 
+	?var1 <http://www.wikidata.org/prop/P21> ?fprov0 . 
+	?fprov0 <http://www.wikidata.org/prop/statement/P21> <http://www.wikidata.org/entity/Q6581097> . 
+	?var1 <http://www.wikidata.org/prop/P31> ?fprov1 . 
+	?fprov1 <http://www.wikidata.org/prop/statement/P31> <http://www.wikidata.org/entity/Q5> . 
+	BIND (CONCAT("(⊗",STR(?fprov0) ,",",STR(?fprov1) ,",",")")  AS ?fjoin1) . 
+ }
+ GROUP BY ?var1 
+ }  OPTIONAL { { SELECT ?var1 ?var2 (CONCAT("⊕(",GROUP_CONCAT(?fjoin2) ,")")  AS ?rightunion2) 
+WHERE { 
+	?var1 <http://www.wikidata.org/prop/P106> ?fprov2 . 
+	?fprov2 <http://www.wikidata.org/prop/statement/P106> ?var2 . 
+	BIND (CONCAT("(⊗",STR(?fprov2) ,",",")")  AS ?fjoin2) . 
+ }
+ GROUP BY ?var1 ?var2 
+ } }  }
+ GROUP BY ?var1 ?var2 ?rightunion1 
+ } }
+	BIND (CONCAT("(⊕",?rightunion0,",",?rightoptional1,",",")")  AS ?funion0) . 
+ }
+ GROUP BY ?var1

@@ -1,0 +1,35 @@
+PREFIX gnp: <http://example.org/p/www.geonames.org/ontology#>
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX gnps: <http://example.org/ps/www.geonames.org/ontology#>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT  ?v0 ?v1 ?v3 (concat("(⊕",group_concat(?funion1),")" )AS ?f)
+WHERE {
+{SELECT ?v0 ?v1 ?v3 (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin1) WHERE {
+            wsdbm:City136 gnp:parentCountry ?fprov0 . ?fprov0 gnps:parentCountry ?v3 .
+            ?v0 sorgp:nationality ?fprov1 . ?fprov1 sorgps:nationality ?v3 .
+           ?v0 sorgp:jobTitle ?fprov2 . ?fprov2 sorgps:jobTitle ?v1 .
+            BIND(concat(" (⊗",COALESCE(STR(?fprov0),""),COALESCE(STR(?fprov1),""),COALESCE(STR(?fprov2),""),")")AS ?fprov)           
+          }group by ?v0 ?v1 ?v2 ?v3}
+UNION
+{SELECT ?v0 ?v1 ?v3  (concat("(⊖",?fjoin2,group_concat(?fjoin3),")")AS ?fopt1) WHERE {
+    {
+SELECT ?v0 ?v3  (concat("(⊕",group_concat(?fprov),")")AS ?fjoin2) WHERE {
+                 wsdbm:City136 gnp:parentCountry ?fprov0 . ?fprov0 gnps:parentCountry ?v3 .
+            ?v0 sorgp:nationality ?fprov1 . ?fprov1 sorgps:nationality ?v3 .
+  
+                    BIND(concat(" (⊗",COALESCE(STR(?fprov0),""),COALESCE(STR(?fprov1),""), ")")AS ?fprov)
+     }group by ?v0 ?v3 
+    }
+        OPTIONAL{
+                                        
+                            { Select ?v0 ?v1 (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin3)
+                          where{      ?v0 sorgp:jobTitle ?fprov2 . ?fprov2 sorgps:jobTitle ?v1 .
+                        BIND(concat(" (⊗",COALESCE(STR(?fprov2),""), ")")AS ?fprov)
+                          }group by ?v0 ?v1}.
+    }
+}group by ?v0 ?v1 ?v3 ?fjoin2}  
+    BIND(concat(" (⊕",COALESCE(STR(?fjoin1),""),COALESCE(STR(?fopt1),""), ")")AS ?funion1)
+}group by ?v0 ?v1 ?v3
+

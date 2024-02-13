@@ -1,0 +1,15 @@
+prefix sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+
+SELECT ?v0 ?v1 ?v2 ?v4 ?v5 ?v6 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+?fprov0 rdf:subject ?v0 ; rdf:predicate sorg:contentRating ; rdf:object ?v1 . 
+ ?fprov1 rdf:subject ?v0 ; rdf:predicate sorg:contentSize ; rdf:object ?v2 .
+ ?fprov2 rdf:subject ?v0 ; rdf:predicate wsdbm:hasGenre ; rdf:object ?v3 . 
+  ?fprov3 rdf:subject ?v4 ; rdf:predicate wsdbm:makesPurchase ; rdf:object ?v5 . 
+    ?fprov4 rdf:subject ?v5 ; rdf:predicate wsdbm:purchaseDate ; rdf:object ?v6 .
+  ?fprov5 rdf:subject ?v5 ; rdf:predicate wsdbm:purchaseFor ; rdf:object ?v0 . 
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5), ")")AS ?fprov)
+	
+}group by ?v0 ?v1 ?v2 ?v3 ?v4 ?v5 ?v6 
+

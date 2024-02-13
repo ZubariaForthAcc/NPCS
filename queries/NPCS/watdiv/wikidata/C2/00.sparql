@@ -1,0 +1,26 @@
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX revp: <http://example.org/p/purl.org/stuff/rev#>
+PREFIX revps: <http://example.org/ps/purl.org/stuff/rev#>
+PREFIX grp: <http://example.org/p/purl.org/goodrelations/>
+PREFIX grps: <http://example.org/ps/purl.org/goodrelations/>
+PREFIX foafp: <http://example.org/p/xmlns.com/foaf/>
+PREFIX foafps: <http://example.org/ps/xmlns.com/foaf/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+select ?v0 ?v3 ?v4 ?v8 (concat("(⊕",group_concat(?fprov),")")AS ?f) where { 
+?v0 sorgp:legalName ?fprov0 . ?fprov0 sorgps:legalName ?v1 .
+?v0 grp:offers ?fprov1 . ?fprov1 grps:offers ?v2 .
+?v2 sorgp:eligibleRegion ?fprov2 . ?fprov2 sorgps:eligibleRegion ?a .
+?v2 grp:includes ?fprov3 . ?fprov3 grps:includes ?v3 .
+?v4 sorgp:jobTitle ?fprov4 . ?fprov4 sorgps:jobTitle ?v5 .
+?v4 foafp:homepage ?fprov5 . ?fprov5 foafps:homepage ?v6 .
+?v4 wsdbmp:makesPurchase ?fprov6 . ?fprov6 wsdbmps:makesPurchase ?v7 .
+?v7 wsdbmp:purchaseFor ?fprov7 . ?fprov7 wsdbmps:purchaseFor ?v3 .
+?v3 revp:hasReview ?fprov8 . ?fprov8 revps:hasReview ?v8 .
+?v8 revp:totalVotes ?fprov9 . ?fprov9 revps:totalVotes ?v9 .
+  BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),STR(?fprov8),STR(?fprov9),")")AS ?fprov)
+	
+}group by ?v0 ?v3 ?v4 ?v8

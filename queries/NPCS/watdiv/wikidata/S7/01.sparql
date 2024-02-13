@@ -1,0 +1,17 @@
+PREFIX rdfp: <http://example.org/p/www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfps: <http://example.org/ps/www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+
+SELECT ?v0 ?v1 ?v2  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+               
+   ?v0 rdfp:type ?fprov0 . ?fprov0 rdfps:type ?v1 .
+?v0 sorgp:text ?fprov1 . ?fprov1 sorgps:text ?v2 .
+wsdbm:User124821 wsdbmp:likes ?fprov2 . ?fprov2 wsdbmps:likes ?v0 .                  
+    
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2), ")")AS ?fprov)
+     }group by ?v0 ?v1 ?v2 

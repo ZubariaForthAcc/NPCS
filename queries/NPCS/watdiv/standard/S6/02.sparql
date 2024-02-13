@@ -1,0 +1,11 @@
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mo: <http://purl.org/ontology/mo/>
+PREFIX ex: <http://example.org/>
+SELECT ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+ 
+        ?fprov0 rdf:subject ?v0 ; rdf:predicate mo:conductor ; rdf:object ?v1 .
+                               ?fprov1 rdf:subject ?v0 ; rdf:predicate rdf:type ; rdf:object ?v2 .
+                              ?fprov2 rdf:subject ?v0 ; rdf:predicate wsdbm:hasGenre ; rdf:object wsdbm:SubGenre42 .               
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2), ")")AS ?fprov)
+     }group by ?v0

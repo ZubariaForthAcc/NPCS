@@ -1,0 +1,23 @@
+PREFIX grp: <http://example.org/p/purl.org/goodrelations/>
+PREFIX grps: <http://example.org/ps/purl.org/goodrelations/>
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+  
+  ?v0 grp:includes ?fprov0 . ?fprov0 grps:includes ?v1 .
+wsdbm:Retailer3630 grp:offers ?fprov1 . ?fprov1 grps:offers ?v0 .
+?v0 grp:price ?fprov2 . ?fprov2 grps:price ?v3 .
+?v0 grp:serialNumber ?fprov3 . ?fprov3 grps:serialNumber ?v4 .
+?v0 grp:validFrom ?fprov4 . ?fprov4 grps:validFrom ?v5 .
+?v0 grp:validThrough ?fprov5 . ?fprov5 grps:validThrough ?v6 .
+?v0 sorgp:eligibleQuantity ?fprov6 . ?fprov6 sorgps:eligibleQuantity ?v7 .
+?v0 sorgp:eligibleRegion ?fprov7 . ?fprov7 sorgps:eligibleRegion ?v8 .
+?v0 sorgp:priceValidUntil ?fprov8 . ?fprov8 sorgps:priceValidUntil ?v9 .    
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),STR(?fprov8), ")")AS ?fprov)
+	
+}group by ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9
+

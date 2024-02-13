@@ -1,0 +1,16 @@
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX rdfp: <http://example.org/p/www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfps: <http://example.org/ps/www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mop: <http://example.org/p/purl.org/ontology/mo/>
+PREFIX mops: <http://example.org/ps/purl.org/ontology/mo/>
+PREFIX ex: <http://example.org/>
+SELECT ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+    
+                      
+      ?v0 mop:conductor ?fprov0 . ?fprov0 mops:conductor ?v1 .
+?v0 rdfp:type ?fprov1 . ?fprov1 rdfps:type ?v2 .
+?v0 wsdbmp:hasGenre ?fprov2 . ?fprov2 wsdbmps:hasGenre wsdbm:SubGenre28 .                   
+      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2), ")")AS ?fprov)
+     }group by ?v0

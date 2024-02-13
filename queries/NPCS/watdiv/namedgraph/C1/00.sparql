@@ -1,0 +1,22 @@
+prefix sorg: <http://schema.org/>
+prefix rev: <http://purl.org/stuff/rev#>
+PREFIX gr: <http://purl.org/goodrelations/>
+prefix foaf: <http://xmlns.com/foaf/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?v0 ?v4 ?v6 ?v7 (concat("(⊕",group_concat(?fprov),")")AS ?f) where { 
+   
+  GRAPH ?fprov0 { ?v0 sorg:caption ?v1 . }
+  GRAPH ?fprov1 { ?v0 sorg:text ?v2 . }
+  GRAPH ?fprov2 { ?v0 sorg:contentRating ?v3 . }
+  GRAPH ?fprov3 { ?v0 rev:hasReview ?v4 . }
+  GRAPH ?fprov4 { ?v4 rev:title ?v5 . }
+  GRAPH ?fprov5 { ?v4 rev:reviewer ?v6 . }
+  GRAPH ?fprov6 { ?v7 sorg:actor ?v6 . }
+  GRAPH ?fprov7 { ?v7 sorg:language ?v8 . } 
+   
+    
+  BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),")")AS ?fprov)
+	
+}group by ?v0 ?v4 ?v6 ?v7

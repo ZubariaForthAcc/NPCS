@@ -1,0 +1,17 @@
+prefix sorg: <http://schema.org/>
+prefix rev: <http://purl.org/stuff/rev#>
+PREFIX gr: <http://purl.org/goodrelations/>
+prefix foaf: <http://xmlns.com/foaf/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+select ?v0 ?v3 ?v4 ?v8 where { 
+    ?v0	sorg:legalName	?v1 .
+	?v0	gr:offers	?v2 .
+	?v2	sorg:eligibleRegion	?a .
+   ?v2	gr:includes	?v3 .
+	?v4	sorg:jobTitle	?v5 .
+	?v4	foaf:homepage	?v6 .
+	?v4	wsdbm:makesPurchase	?v7 .
+    ?v7	wsdbm:purchaseFor	?v3 .
+	?v3	rev:hasReview	?v8 .
+	?v8	rev:totalVotes	?v9 .
+} 

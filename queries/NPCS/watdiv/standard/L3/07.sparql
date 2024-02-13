@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+select ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) where {                          
+                      
+      ?fprov0 rdf:subject ?v0 ; rdf:predicate wsdbm:likes ; rdf:object ?v1 .  
+                    ?fprov1 rdf:subject ?v0 ; rdf:predicate wsdbm:subscribes ; rdf:object wsdbm:Website2059 . 
+                           
+                      BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),")")AS ?fprov)
+                              
+    }group by ?v0 

@@ -1,0 +1,22 @@
+PREFIX foafp: <http://example.org/p/xmlns.com/foaf/>
+PREFIX foafps: <http://example.org/ps/xmlns.com/foaf/>
+PREFIX mop: <http://example.org/p/purl.org/ontology/mo/>
+PREFIX mops: <http://example.org/ps/purl.org/ontology/mo/>
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT ?v0 ?v2 ?v3 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+    
+   ?v0 foafp:age ?fprov0 . ?fprov0 foafps:age wsdbm:AgeGroup5 .
+?v0 foafp:familyName ?fprov1 . ?fprov1 foafps:familyName ?v2 .
+?v3 mop:artist ?fprov2 . ?fprov2 mops:artist ?v0 .
+?v0 sorgp:nationality ?fprov3 . ?fprov3 sorgps:nationality wsdbm:Country1 .    
+
+
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3), ")")AS ?fprov)
+	
+}group by ?v0 ?v2 ?v3 
+

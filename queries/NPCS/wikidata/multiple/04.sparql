@@ -1,0 +1,13 @@
+SELECT ?var4 (CONCAT("⊕(",GROUP_CONCAT(?fprov) ,")")  AS ?finalprovennacevariable) 
+WHERE { 
+	<http://www.wikidata.org/entity/Q937> <http://www.wikidata.org/prop/P19> ?fprov0 . 
+	?fprov0 <http://www.wikidata.org/prop/statement/P19> ?var1 . 
+	?var1 <http://www.wikidata.org/prop/P31> ?fprov1 . 
+	?fprov1 <http://www.wikidata.org/prop/statement/P31> ?var4 . 
+	?var2 <http://www.wikidata.org/prop/P31> ?fprov2 . 
+	?fprov2 <http://www.wikidata.org/prop/statement/P31> ?var4 . 
+	?var3 <http://www.wikidata.org/prop/P31> ?fprov3 . 
+	?fprov3 <http://www.wikidata.org/prop/statement/P31> ?var4 . 
+	BIND (CONCAT("(⊗",STR(?fprov0) ,",",STR(?fprov1) ,",",STR(?fprov2) ,",",STR(?fprov3) ,",",")")  AS ?fprov) . 
+ }
+ GROUP BY ?var4

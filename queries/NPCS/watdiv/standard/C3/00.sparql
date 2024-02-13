@@ -1,0 +1,17 @@
+PREFIX ex: <http://example.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?v0  (concat("(⊕ ",group_concat(?fprov),")")AS ?f) where { 
+   
+?fprov0 rdf:subject ?v0 ; rdf:predicate rdf:type ; rdf:object wsdbm:Role0 .
+?fprov1 rdf:subject ?v0 ; rdf:predicate wsdbm:likes ; rdf:object ?v1 .
+?fprov2 rdf:subject ?v0 ; rdf:predicate wsdbm:friendOf ; rdf:object ?v2 . 
+?fprov3 rdf:subject ?v0 ; rdf:predicate dc:Location ; rdf:object ?v3 . 
+?fprov4 rdf:subject ?v0 ; rdf:predicate foaf:age ; rdf:object ?v4 .  
+?fprov5 rdf:subject ?v0 ; rdf:predicate wsdbm:gender ; rdf:object ?v5 . 
+?fprov6 rdf:subject ?v0 ; rdf:predicate foaf:givenName ; rdf:object ?v6 .  
+  BIND(concat(" (⊗ ",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),")")AS ?fprov)
+	
+}group by ?v0 

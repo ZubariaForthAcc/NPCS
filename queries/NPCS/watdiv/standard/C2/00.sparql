@@ -1,0 +1,20 @@
+prefix sorg: <http://schema.org/>
+prefix rev: <http://purl.org/stuff/rev#>
+PREFIX gr: <http://purl.org/goodrelations/>
+prefix foaf: <http://xmlns.com/foaf/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+select ?v0 ?v3 ?v4 ?v8 (concat("(⊕",group_concat(?fprov),")")AS ?f) where { 
+?fprov0 rdf:subject  ?v0 ; rdf:predicate sorg:legalName ; rdf:object ?v1 . 
+?fprov1 rdf:subject ?v0 ; rdf:predicate gr:offers ; rdf:object ?v2. 
+?fprov2 rdf:subject ?v2 ; rdf:predicate sorg:eligibleRegion ; rdf:object ?a. 
+  ?fprov3 rdf:subject  ?v2 ; rdf:predicate gr:includes ; rdf:object ?v3.
+?fprov4 rdf:subject ?v4	; rdf:predicate sorg:jobTitle ; rdf:object ?v5. 
+ ?fprov5 rdf:subject ?v4 ; rdf:predicate foaf:homepage ; rdf:object ?v6. 
+?fprov6  rdf:subject ?v4 ; rdf:predicate wsdbm:makesPurchase ; rdf:object ?v7. 
+?fprov7  rdf:subject  ?v7 ; rdf:predicate wsdbm:purchaseFor ; rdf:object ?v3. 
+ ?fprov8  rdf:subject ?v3 ; rdf:predicate rev:hasReview	; rdf:object ?v8. 
+?fprov9   rdf:subject ?v8 ; rdf:predicate rev:totalVotes ; rdf:object ?v9. 
+  BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),STR(?fprov8),STR(?fprov9),")")AS ?fprov)
+	
+}group by ?v0 ?v3 ?v4 ?v8

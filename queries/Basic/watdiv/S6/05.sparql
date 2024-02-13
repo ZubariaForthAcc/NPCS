@@ -1,0 +1,9 @@
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mo: <http://purl.org/ontology/mo/>
+SELECT ?v0
+WHERE {
+  ?v0  mo:conductor    ?v1 .
+  ?v0  rdf:type        ?v2 .
+  ?v0  wsdbm:hasGenre  wsdbm:SubGenre28 .
+}

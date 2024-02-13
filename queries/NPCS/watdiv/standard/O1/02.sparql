@@ -1,0 +1,32 @@
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX ex: <http://example.org/>
+SELECT  ?v0 ?v2 ?v3 (concat("(⊕",group_concat(?funion1),")" )AS ?f)
+WHERE {
+{SELECT ?v0 ?v1 ?v2 ?v3 (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin1) WHERE {
+    ?fprov0 rdf:subject ?v0 ; rdf:predicate wsdbm:subscribes ; rdf:object wsdbm:Website48374 . 
+     ?fprov1 rdf:subject ?v0 ; rdf:predicate wsdbm:likes ; rdf:object ?v2 .  
+    ?fprov2 rdf:subject ?v2 ; rdf:predicate sorg:caption ; rdf:object ?v3 .
+            BIND(concat(" (⊗",COALESCE(STR(?fprov0),""),COALESCE(STR(?fprov1),""),COALESCE(STR(?fprov2),""),")")AS ?fprov)           
+          }group by ?v0 ?v1 ?v2 ?v3}
+UNION
+{SELECT ?v0 ?v2 ?v3  (concat("(⊖",?fjoin2,group_concat(?fjoin3),")")AS ?fopt1) WHERE {
+    {
+SELECT ?v0 ?v2  (concat("(⊕",group_concat(?fprov),")")AS ?fjoin2) WHERE {
+              ?fprov0 rdf:subject ?v0 ; rdf:predicate wsdbm:subscribes ; rdf:object wsdbm:Website48374 . 
+     ?fprov1 rdf:subject ?v0 ; rdf:predicate wsdbm:likes ; rdf:object ?v2 . 
+  
+                    BIND(concat(" (⊗",COALESCE(STR(?fprov0),""),COALESCE(STR(?fprov1),""), ")")AS ?fprov)
+     }group by ?v0 ?v2 
+    }
+        OPTIONAL{
+                                        
+                            { Select ?v2 ?v3 (concat("(⊕",group_concat(?fprov),")" )AS ?fjoin3)
+                          where{      ?fprov2 rdf:subject ?v2 ; rdf:predicate sorg:caption ; rdf:object ?v3 . 
+                        BIND(concat(" (⊗",COALESCE(STR(?fprov2),""), ")")AS ?fprov)
+                          }group by ?v2 ?v3}.
+    }
+}group by ?v0 ?v2 ?v3 ?fjoin2}  
+    BIND(concat(" (⊕",COALESCE(STR(?fjoin1),""),COALESCE(STR(?fopt1),""), ")")AS ?funion1)
+}group by ?v0 ?v2 ?v3
+

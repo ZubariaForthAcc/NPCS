@@ -1,0 +1,19 @@
+PREFIX ex: <http://example.org/>
+PREFIX foaf: <http://xmlns.com/foaf/>
+PREFIX og: <http://ogp.me/ns#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sorg: <http://schema.org/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+SELECT ?v0 ?v1 ?v2 ?v4 ?v5 ?v6 ?v7 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+		?fprov0 rdf:subject ?v0 ; rdf:predicate foaf:homepage ; rdf:object ?v1 . 
+?fprov1 rdf:subject ?v0 ; rdf:predicate og:title ; rdf:object ?v2 . 
+  ?fprov2 rdf:subject ?v0 ; rdf:predicate rdf:type ; rdf:object ?v3 .     
+   ?fprov3 rdf:subject ?v0 ; rdf:predicate sorg:caption ; rdf:object ?v4 . 
+  ?fprov4 rdf:subject ?v0 ; rdf:predicate sorg:description ; rdf:object ?v5 . 
+       ?fprov5 rdf:subject ?v1 ; rdf:predicate sorg:url ; rdf:object ?v6 .
+       ?fprov6 rdf:subject ?v1 ; rdf:predicate wsdbm:hits ; rdf:object ?v7 . 
+    ?fprov7 rdf:subject ?v0 ; rdf:predicate wsdbm:hasGenre ; rdf:object wsdbm:SubGenre5 . 
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7), ")")AS ?fprov)
+	
+}group by ?v0 ?v1 ?v2 ?v4 ?v5 ?v6 ?v7 
+

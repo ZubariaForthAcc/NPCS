@@ -1,0 +1,27 @@
+PREFIX ex: <http://example.org/>
+PREFIX foafp: <http://example.org/p/xmlns.com/foaf/>
+PREFIX foafps: <http://example.org/ps/xmlns.com/foaf/>
+PREFIX grp: <http://example.org/p/purl.org/goodrelations/>
+PREFIX grps: <http://example.org/ps/purl.org/goodrelations/>
+PREFIX ogp: <http://example.org/p/ogp.me/ns#>
+PREFIX ogps: <http://example.org/ps/ogp.me/ns#>
+PREFIX sorgp: <http://example.org/p/schema.org/>
+PREFIX sorgps: <http://example.org/ps/schema.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+SELECT ?v0 ?v1 ?v2 ?v4 ?v5 ?v6 ?v7 ?v8 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+
+?v0 foafp:homepage ?fprov0 . ?fprov0 foafps:homepage ?v1 .
+?v2 grp:includes ?fprov1 . ?fprov1 grps:includes ?v0 .
+?v0 ogp:tag ?fprov2 . ?fprov2 ogps:tag wsdbm:Topic10 .
+?v0 sorgp:description ?fprov3 . ?fprov3 sorgps:description ?v4 .
+?v0 sorgp:contentSize ?fprov4 . ?fprov4 sorgps:contentSize ?v8 .
+?v1 sorgp:url ?fprov5 . ?fprov5 sorgps:url ?v5 .
+?v1 wsdbmp:hits ?fprov6 . ?fprov6 wsdbmps:hits ?v6 .
+?v1 sorgp:language ?fprov7 . ?fprov7 sorgps:language wsdbm:Language0 .
+?v7 wsdbmp:likes ?fprov8 . ?fprov8 wsdbmps:likes ?v0 . 
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),STR(?fprov7),STR(?fprov8), ")")AS ?fprov)
+	
+}group by ?v0 ?v1 ?v2 ?v4 ?v5 ?v6 ?v7 ?v8
+

@@ -1,0 +1,23 @@
+PREFIX ex: <http://example.org/>
+PREFIX wsdbmp: <http://example.org/p/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbmps: <http://example.org/ps/db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX dcp: <http://example.org/p/purl.org/dc/terms/>
+PREFIX dcps: <http://example.org/ps/purl.org/dc/terms/>
+PREFIX foafp: <http://example.org/p/xmlns.com/foaf/>
+PREFIX foafps: <http://example.org/ps/xmlns.com/foaf/>
+PREFIX rdfp: <http://example.org/p/www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfps: <http://example.org/ps/www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?v0  (concat("(⊕",group_concat(?fprov),")")AS ?f) where { 
+   
+?v0 rdfp:type ?fprov0 . ?fprov0 rdfps:type wsdbm:Role0 .
+?v0 wsdbmp:likes ?fprov1 . ?fprov1 wsdbmps:likes ?v1 .
+?v0 wsdbmp:friendOf ?fprov2 . ?fprov2 wsdbmps:friendOf ?v2 .
+?v0 dcp:Location ?fprov3 . ?fprov3 dcps:Location ?v3 .
+?v0 foafp:age ?fprov4 . ?fprov4 foafps:age ?v4 .
+?v0 wsdbmp:gender ?fprov5 . ?fprov5 wsdbmps:gender ?v5 .
+?v0 foafp:givenName ?fprov6 . ?fprov6 foafps:givenName ?v6 . 
+  BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5),STR(?fprov6),")")AS ?fprov)
+	
+}group by ?v0 

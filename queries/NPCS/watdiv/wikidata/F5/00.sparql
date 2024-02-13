@@ -1,0 +1,18 @@
+PREFIX rdfp: <http://example.org/p/www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfps: <http://example.org/ps/www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX grp: <http://example.org/p/purl.org/goodrelations/>
+PREFIX grps: <http://example.org/ps/purl.org/goodrelations/>
+PREFIX ogp: <http://example.org/p/ogp.me/ns#>
+PREFIX ogps: <http://example.org/ps/ogp.me/ns#>
+PREFIX ex: <http://example.org/>
+SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 (concat("(⊕",group_concat(?fprov),")")AS ?f) WHERE {
+?v0 grp:includes ?fprov0 . ?fprov0 grps:includes ?v1 .
+?v2 grp:offers ?fprov1 . ?fprov1 grps:offers ?v0 .
+?v0 grp:price ?fprov2 . ?fprov2 grps:price ?v3 .
+?v0 grp:validThrough ?fprov3 . ?fprov3 grps:validThrough ?v4 .
+?v1 ogp:title ?fprov4 . ?fprov4 ogps:title ?v5 .
+?v1 rdfp:type ?fprov5 . ?fprov5 rdfps:type ?v6 . 
+            BIND(concat(" (⊗",STR(?fprov0),STR(?fprov1),STR(?fprov2),STR(?fprov3),STR(?fprov4),STR(?fprov5), ")")AS ?fprov)
+	
+}group by ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 
+
